@@ -6,15 +6,39 @@
 	max-width: 400px
 	color: #777
 	display: block
-	cursor: pointer
+	margin: 0px auto;
+	text-align: left
 
 	.selected
 		height: 40px
 		padding: 9px 40px 11px 15px
 
+	.viewAction
+		cursor: pointer
+
 	.options
 		display: none
-
+		padding: 4px 20px
+		list-style: none
+		border: 1px solid #e1e1e1
+		border-top: initial
+		position: absolute
+		width: 100%
+		top: 40px
+		z-index: 2
+		max-height: 244px
+		overflow: hidden
+		background: #FFF;
+		li
+			padding: 10px 0px
+			border-bottom: 1px solid #e1e1e1
+			cursor: pointer
+			&:last-child
+    			border-bottom: 0px
+			&:hover
+				@extend .transition
+				color: #0669de
+	    
 	.arrow
 		background: #0669de
 		height: 40px
@@ -26,4 +50,4 @@
 		color: #FFF
 		i
 			font-size: 20px
-			margin: 9px
+			margin-top: 11px
