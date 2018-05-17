@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import Logo					from './Logo';
 import SelectRepo 			from './SelectRepo';
 import Infos 				from './Infos';
 import Chart				from './Chart';
-import Logo					from './Logo';
 
 class App extends Component{
 	render(){
@@ -11,8 +11,6 @@ class App extends Component{
 				<Logo />
 				<SelectRepo />
 				<Infos />
-				{/*
-        		<Chart />*/}
       		</div>		
 		);
 	}

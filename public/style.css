@@ -16,7 +16,7 @@ body {
   margin: 80px auto;
   text-align: center; }
 
-.transition, .fakeSelect .options li:hover {
+.transition, .fakeSelect .options li, .infos .box:after {
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
@@ -72,7 +72,8 @@ body {
       .fakeSelect .options li:last-child {
         border-bottom: 0px; }
       .fakeSelect .options li:hover {
-        color: #0669de; }
+        color: #0669de;
+        padding-left: 5px; }
   .fakeSelect .arrow {
     background: #0669de;
     height: 40px;
@@ -85,3 +86,51 @@ body {
     .fakeSelect .arrow i {
       font-size: 20px;
       margin-top: 11px; }
+
+.infos {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px; }
+  .infos .box {
+    width: 32%;
+    height: 120px;
+    padding: 15px;
+    border: 1px solid #e1e1e1;
+    text-align: center;
+    position: relative;
+    overflow: hidden; }
+    .infos .box:after {
+      position: absolute;
+      font-size: 130px;
+      font-family: Font Awesome\ 5 Free;
+      z-index: -1;
+      opacity: 0.08;
+      font-weight: 900; }
+    .infos .box.stars {
+      color: #cd150c; }
+      .infos .box.stars:after {
+        content: '\f005';
+        top: -10px;
+        right: -45px; }
+    .infos .box.forks {
+      color: #359e00; }
+      .infos .box.forks:after {
+        content: "\f126";
+        top: -12px;
+        right: -10px; }
+    .infos .box.contribs {
+      color: #ff8100; }
+      .infos .box.contribs:after {
+        content: '\f0c0';
+        top: -9px;
+        right: -70px; }
+    .infos .box:hover:after {
+      opacity: 0.2; }
+    .infos .box span {
+      display: block;
+      font-size: 23px;
+      font-weight: bold;
+      margin-top: 5px; }
+    .infos .box .num {
+      font-size: 35px;
+      font-weight: 300; }
