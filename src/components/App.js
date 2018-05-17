@@ -6,8 +6,9 @@ import Chart				from './Chart';
 class App extends Component{
 	render(){
 		return (
-			<div>
-				{/*<SelectRepo />
+			<div id="main-wrapper">
+				<SelectRepo />
+				{/*
 				<Infos />
         		<Chart />*/}
       		</div>		
