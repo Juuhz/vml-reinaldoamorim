@@ -8,20 +8,13 @@ class Chart extends Component{
 		this.state = {
 			chart: {
 				'cht': 		'ls', // Tipo de gráfico: linha
-				'chd': 		't:50,25,150|25,37,30|12,80,80', // Valores 
+				'chd': 		't:50,25,150', // Valores 
 				'chs': 		'800x220', // Tamanho (usado 800x220)
-				'chdl': 	'Stars|Forks|Contribs', //  Legendas
-				'chdlp': 	'b', // Posição da legenda
 				'chdls': 	'333333,14', // Cor,tamanho da legenda
-				'chg': 		'0,25,0,0', // Grid
-				'chco': 	'cd150c,359e00,ff8100', // Cores das linhas
-				'chtt': 	'', // Título do gráfico
-				'chts': 	'333333,20', // Cor,tamanho do título
+				'chg': 		'0,10,0,0', // Grid
+				'chco': 	'000000', // Cores das linhas
 				'chxt': 	'y,x', // Quais eixos mostrar
-				'chxl': 	'', //Nomes dos valores no eixo X
-				'chls': 	'2|2|2', // Espessura da linha
-				'chma': 	'5,40', // Margem do gráfico
-				'chm': 		'' // Texto nos pontos
+				'chls': 	'3', // Espessura da linha
 			},
 			urlChart: ''
 		}
