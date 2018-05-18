@@ -27,8 +27,18 @@
 		top: 40px
 		z-index: 2
 		max-height: 244px
-		overflow: hidden
+		overflow: auto
 		background: #FFF;
+		
+		&::-webkit-scrollbar
+			width: 10px
+		
+		&::-webkit-scrollbar-track
+			background: #f1f1f1
+		
+		&::-webkit-scrollbar-thumb
+			background: #333
+		
 		li
 			padding: 10px 0px
 			border-bottom: 1px solid #e1e1e1

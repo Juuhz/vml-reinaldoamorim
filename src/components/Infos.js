@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Infos extends Component{
 	render(){
 		return(
-			<div class="infos">
+			<div className="infos">
 				<div className="box stars">
 					<span>Total de Stars</span>
 					<div className="num">90.000</div>
