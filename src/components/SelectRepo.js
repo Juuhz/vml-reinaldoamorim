@@ -38,30 +38,6 @@ class SelectRepo extends Component{
 
 	}
 
-	//Retorna Dropdown
-	renderDropdown(){
-
-		if( !this.state.isLoadRepo ){
-			return(
-				<ul className="options" style={{ display: this.state.openDropdown }}>
-					<li>Carregando repositórios, aguarde...</li>
-				</ul>
-			);
-		}
-
-		return(
-			<ul className="options" style={{ display: this.state.openDropdown }}>
-				{	
-					this.state.repositories.map( function( repository ){
-						return (
-							<li key={repository.id}>{repository.name}</li>
-						);
-					})
-				}
-			</ul>
-		);
-	}
-
 	render(){
 		return(
 			<div className="fakeSelect">
@@ -69,10 +45,38 @@ class SelectRepo extends Component{
 					<div className="arrow"><i className="fas fa-angle-down"></i></div>
 					<div className="selected">Selecione um repositório | Globo.com</div>
 				</div>
-				{this.renderDropdown()}
+				<RenderDropdown 
+					isLoadRepo={this.state.isLoadRepo}
+					openDropdown={this.state.openDropdown}
+					repositories={this.state.repositories} 
+				/>
 			</div>
 		);
 	}
+}
+
+//Retorna Dropdown
+const RenderDropdown = ( props ) => {
+	
+	if( !props.isLoadRepo ){
+		return(
+			<ul className="options" style={{ display: props.openDropdown }}>
+				<li>Carregando repositórios, aguarde...</li>
+			</ul>
+		);
+	}
+
+	return(
+		<ul className="options" style={{ display: props.openDropdown }}>
+			{	
+				props.repositories.map( function( repository ){
+					return (
+						<li key={repository.id}>{repository.name}</li>
+					);
+				})
+			}
+		</ul>
+	);
 }
 
 export default SelectRepo;
