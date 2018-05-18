@@ -23,13 +23,13 @@ class SelectRepo extends Component{
 	//Ajax para carregar os repositorios
 	componentWillMount(){
 
-		fetch( 'https://api.github.com/search/repositories?q=user:globocom&sort=stars:desc&per_page=999' )
+		fetch( 'https://api.github.com/users/globocom/repos?sort=stars:desc&per_page=999' )
 		.then( res => res.json() )
 		.then(
 			( result ) => {
 				
 				this.setState({
-					repositories: result.items,
+					repositories: result,
 					isLoadRepo: true
 				});
 
