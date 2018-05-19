@@ -61,12 +61,12 @@ npm start
 
 ```
 
-OBS: ao rodar o **npm start**, será aberta automaticamente uma página no seu navegador, apontando para **http://localhost:3030**, caso isso não aconteça, basta acessar a url manualmente.
+OBS: ao rodar o **npm start**, será aberta automaticamente uma página no seu navegador, apontando para **http://localhost:3000**, caso isso não aconteça, basta acessar a url manualmente.
 
 ## Autor
 
-* **Reianldo Amorim** - [http://reinaldoamorim.com.br](http://reinaldoamorim.com.br)
+**Reianldo Amorim** - [http://reinaldoamorim.com.br](http://reinaldoamorim.com.br)
 
 ## Agradecimentos
 
-* Equipe VML, pela oportunidade.
+Equipe VML, pela oportunidade.
