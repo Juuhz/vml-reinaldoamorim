@@ -22,9 +22,12 @@ body
 	font-size: 14px
 
 #main-wrapper
-	max-width: 800px;
-	margin: 80px auto;
+	max-width: 800px
+	margin: 80px auto
 	text-align: center
+	.container-statics
+		&.hidden
+			display: none
 
 // Effects
 //______________________________
@@ -34,6 +37,32 @@ body
 	-moz-transition: all 0.3s ease-in-out
 	-o-transition: all 0.3s ease-in-out
 	transition: all 0.3s ease-in-out
+
+@keyframes placeHolderShimmer
+	0%
+		background-position: -468px 0
+
+	100%
+		background-position: 468px 0
+
+.loader
+	&:before
+		animation-duration: 1s;
+		animation-fill-mode: forwards;
+		animation-iteration-count: infinite;
+		animation-name: placeHolderShimmer;
+		animation-timing-function: linear;
+		background: #f6f7f8;
+		background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+		background-size: 800px 104px;
+		height: 96px;
+		position: absolute;
+		z-index: 2;
+		content: "";
+		width: 100%;
+		top: 0px;
+		left: 0px;
+		height: 100%;
 
 // VARIABLES
 //______________________________

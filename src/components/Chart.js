@@ -1,48 +1,35 @@
 import React, { Component } from 'react';
+import { connect } 			from 'react-redux';
 
 class Chart extends Component{
 
-	constructor(){
-		super();
-
-		this.state = {
-			chart: {
-				'cht': 		'ls', // Tipo de gráfico: linha
-				'chd': 		't:50,25,150', // Valores 
-				'chs': 		'800x220', // Tamanho (usado 800x220)
-				'chdls': 	'333333,14', // Cor,tamanho da legenda
-				'chg': 		'0,10,0,0', // Grid
-				'chco': 	'000000', // Cores das linhas
-				'chxt': 	'y,x', // Quais eixos mostrar
-				'chls': 	'3', // Espessura da linha
-			},
-			urlChart: ''
-		}
-
-	}
-
-	componentWillMount(){
-
-		let url = '';
-
-		//Pega os index do array de objeto "chart" e transforma em GET
-		for( let key in this.state.chart ){
-
-			url += key + '=' + ( this.state.chart[key] != undefined ? this.state.chart[key] : '' ) + '&';
-
-		}
-
-		this.setState({
-			urlChart: url
-		});
-
-	}
-
 	render(){
+
+		const { urlChart } = this.props;
+
+		if( !urlChart ){
+			return(
+				<div className="chart"></div>
+			);	
+		}
+
 		return(
-			<img src={`http://chart.apis.google.com/chart?${this.state.urlChart}`} />
+			<div className="chart">
+				<h2>Commits</h2>
+				<img src={`http://chart.apis.google.com/chart?${urlChart}`} />
+			</div>
 		);
 	}
 }
 
-export default Chart;
+//Envia novo estado
+const mapStateToProps = state => {
+	return {
+		urlChart: 	state.urlChart
+	}
+}
+
+//Export
+export default connect(
+	mapStateToProps,
+)(Chart);
