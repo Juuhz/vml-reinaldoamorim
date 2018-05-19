@@ -10,12 +10,12 @@ class SelectRepo extends Component{
 	}
 
 	render(){
-		const { openDropdown, isLoadRepo, repositories, getStatisRepo, curRepo, chart } = this.props;
+		const { openDropdown, openRepo, isLoadRepo, repositories, getStatisRepo, curRepo, chart } = this.props;
 
 		if( !isLoadRepo ){
 			return(
 				<div className="fakeSelect">
-					<div className="viewAction" onClick={this.props.openRepo.bind( this, openDropdown )}>
+					<div className="viewAction" onClick={openRepo.bind( this, openDropdown )}>
 						<div className="arrow"><i className="fas fa-angle-down"></i></div>
 						<div className="selected">{curRepo}</div>
 					</div>
@@ -28,7 +28,7 @@ class SelectRepo extends Component{
 
 		return(
 			<div className="fakeSelect">
-				<div className="viewAction" onClick={this.props.openRepo.bind( this, openDropdown )}>
+				<div className="viewAction" onClick={openRepo.bind( this, openDropdown )}>
 					<div className="arrow"><i className="fas fa-angle-down"></i></div>
 					<div className="selected">{curRepo}</div>
 				</div>
@@ -69,11 +69,11 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch({ type: 'OPEN_DROPDOWN', payload: ( flag == 'block' ? 'none' : 'block' ) });
 		},
 		loadRepo: () => {
-			fetch( 'https://api.github.com/search/repositories?q=user:globocom&sort=stars:desc&per_page=200' )
+			fetch( 'https://api.github.com/users/globocom/repos?sort=stars:desc&per_page=999' )
 			.then( res => res.json() )
 			.then(
 				( result ) => {
-					dispatch({ type: 'LOAD_REPOSITORIES', payload: result.items });
+					dispatch({ type: 'LOAD_REPOSITORIES', payload: result });
 				}
 			);
 		},
