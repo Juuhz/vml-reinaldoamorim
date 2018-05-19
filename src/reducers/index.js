@@ -15,7 +15,7 @@ const initStates = {
 		'chs': 		'800x220', 			// Tamanho (usado 800x220)
 		'chdls': 	'333333,14', 		// Cor, tamanho da legenda
 		'chg': 		'0,10,0,0', 		// Grid
-		'chco': 	'333333', 			// Cores das linhas
+		'chco': 	'0669de', 			// Cores das linhas
 		'chxt': 	'y,x', 				// Quais eixos mostrar
 		'chls': 	'3', 				// Espessura da linha
 		'chxl': 	''					// Meses / Min e Máximo
