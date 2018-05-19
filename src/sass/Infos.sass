@@ -1,7 +1,8 @@
 .infos
-	display: flex
-	justify-content: space-between
 	margin-top: 40px
+	@media (min-width: 768px)
+		display: flex
+		justify-content: space-between
 
 	.box
 		width: 32%
@@ -10,40 +11,44 @@
 		border: 1px solid #e1e1e1
 		text-align: center
 		position: relative
-		overflow: hidden;
+		overflow: hidden
+		@media (max-width: 767px)
+			width: 100%
+			margin-bottom: 15px
+
 		&:after
-			position: absolute;
-			font-size: 130px;
-			font-family: Font Awesome\ 5 Free;
-			z-index: -1;
-			opacity: 0.08;
-			font-weight: 900;
+			position: absolute
+			font-size: 130px
+			font-family: Font Awesome\ 5 Free
+			z-index: -1
+			opacity: 0.08
+			font-weight: 900
 			@extend .transition
 
 		&.stars
 			color: $vermelho
 			&:after
-				content: '\f005';
-				top: -10px;
-				right: -45px;
+				content: '\f005'
+				top: -10px
+				right: -45px
 
 		&.forks
 			color: $verde
 			&:after
-				content: "\f126";
-				top: -12px;
-				right: -10px;
+				content: "\f126"
+				top: -12px
+				right: -10px
 
 		&.contribs
 			color: $laranja
 			&:after
-				content: '\f0c0';
-				top: -9px;
-				right: -70px;
+				content: '\f0c0'
+				top: -9px
+				right: -70px
 
 		&:hover
 			&:after
-				opacity: 0.2;
+				opacity: 0.2
 
 		span
 			display: block

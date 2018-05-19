@@ -2,7 +2,7 @@
 
 Visualize estatísticas sobre cada repositório da globo.com.
 
-## Vamos começar ?
+## Vamos começar?
 
 Essas instruções farão com que você tenha uma cópia do projeto em execução na sua máquina local para fins de desenvolvimento e teste.
 
@@ -65,7 +65,7 @@ OBS: ao rodar o **npm start**, será aberta automaticamente uma página no seu n
 
 ## Autor
 
-**Reianldo Amorim** - [http://reinaldoamorim.com.br](http://reinaldoamorim.com.br)
+**Reinaldo Amorim** - [http://reinaldoamorim.com.br](http://reinaldoamorim.com.br)
 
 ## Agradecimentos
 

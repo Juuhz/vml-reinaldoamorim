@@ -30,7 +30,7 @@ class SelectRepo extends Component{
 			<div className="fakeSelect">
 				<div className="viewAction" onClick={this.props.openRepo.bind( this, openDropdown )}>
 					<div className="arrow"><i className="fas fa-angle-down"></i></div>
-					<div className="selected">Selecione um repositório | Globo.com</div>
+					<div className="selected">{curRepo}</div>
 				</div>
 				<ul className="options" style={{ display: openDropdown }}>
 					{	
@@ -69,11 +69,11 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch({ type: 'OPEN_DROPDOWN', payload: ( flag == 'block' ? 'none' : 'block' ) });
 		},
 		loadRepo: () => {
-			fetch( 'https://api.github.com/users/globocom/repos?sort=stars:desc&per_page=999' )
+			fetch( 'https://api.github.com/search/repositories?q=user:globocom&sort=stars:desc&per_page=200' )
 			.then( res => res.json() )
 			.then(
 				( result ) => {
-					dispatch({ type: 'LOAD_REPOSITORIES', payload: result });
+					dispatch({ type: 'LOAD_REPOSITORIES', payload: result.items });
 				}
 			);
 		},
