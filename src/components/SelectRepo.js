@@ -71,6 +71,7 @@ class SelectRepo extends Component{
 						<i className="fas fa-search"></i> <input type="texte" placeholder="Buscar..." onKeyUp={this.searchRepo} />
 					</div>
 					<ul className="options">
+						<li className="empty">Nada encontrado.</li>
 						{	
 							repositories.map( function( repository ){
 								return (
@@ -78,7 +79,6 @@ class SelectRepo extends Component{
 								);
 							})
 						}
-						<li className="empty">Nada encontrado.</li>
 					</ul>
 				</div>
 			</div>
