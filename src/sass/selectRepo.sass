@@ -6,7 +6,7 @@
 	max-width: 400px
 	color: #777
 	display: block
-	margin: 0px auto;
+	margin: 0px auto
 	text-align: left
 
 	.selected
@@ -16,39 +16,58 @@
 	.viewAction
 		cursor: pointer
 
-	.options
+	.boxDropdown
 		display: none
-		padding: 4px 20px
-		list-style: none
-		border: 1px solid #e1e1e1
-		border-top: initial
 		position: absolute
 		width: 100%
-		top: 40px
+		top: 39px
 		z-index: 2
-		max-height: 244px
-		overflow: auto
-		background: #FFF;
-		
-		&::-webkit-scrollbar
-			width: 10px
-		
-		&::-webkit-scrollbar-track
-			background: #f1f1f1
-		
-		&::-webkit-scrollbar-thumb
-			background: #333
-		
-		li
-			padding: 10px 0px
+		border: 1px solid #e1e1e1
+		border-top: 0px
+		.serachBox
+			width: 100%
+			padding: 4px 20px
+			list-style: none
 			border-bottom: 1px solid #e1e1e1
-			cursor: pointer
-			@extend .transition
-			&:last-child
-				border-bottom: 0px
-			&:hover
-				color: $azul
-				padding-left: 5px;
+			position: relative
+			i
+				position: absolute
+				color: #0669de
+				top: 12px
+			input
+				height: 30px
+				width: 100%
+				padding-left: 25px
+				outline: 0px
+		.options
+			padding: 4px 20px
+			list-style: none
+			border-top: initial
+			max-height: 243px
+			overflow: auto
+			background: #FFF
+			
+			&::-webkit-scrollbar
+				width: 10px
+			
+			&::-webkit-scrollbar-track
+				background: #f1f1f1
+			
+			&::-webkit-scrollbar-thumb
+				background: #333
+			
+			li
+				padding: 10px 0px
+				border-bottom: 1px solid #e1e1e1
+				cursor: pointer
+				@extend .transition
+				&.empty
+					display: none
+				&:last-child
+					border-bottom: 0px
+				&:hover
+					color: $azul
+					padding-left: 5px
 
 	.arrow
 		background: $azul

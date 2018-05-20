@@ -9,6 +9,38 @@ class SelectRepo extends Component{
 		loadRepo();
 	}
 
+	searchRepo( e ){
+			
+		let search 		= e.target.value,
+			ocultados 	= 0,
+			repos 		= document.querySelectorAll('.options li');
+
+			//Transforma tudo em lower case para facilitar a comparação
+			search = search.toLowerCase();
+
+			for ( let i = 0; i < repos.length; i++ ) {
+				
+				if ( repos[i].innerHTML.toLowerCase().indexOf( search ) > -1 ) {
+					repos[i].style.display = "";
+				} else {
+					repos[i].style.display = "none";
+					ocultados++;
+				}
+
+			}
+
+			//Verifica se há li sendo exibida
+
+			console.log( ocultados );
+			console.log( repos.length );
+
+			if( ocultados >= repos.length )
+				document.querySelectorAll('.options li.empty')[0].style.display = "block";
+			else
+				document.querySelectorAll('.options li.empty')[0].style.display = "none";
+
+	}
+
 	render(){
 		const { openDropdown, openRepo, isLoadRepo, repositories, getStatisRepo, curRepo, chart } = this.props;
 
@@ -19,9 +51,11 @@ class SelectRepo extends Component{
 						<div className="arrow"><i className="fas fa-angle-down"></i></div>
 						<div className="selected">{curRepo}</div>
 					</div>
-					<ul className="options" style={{ display: openDropdown }}>
-						<li>Carregando repositórios, aguarde...</li>
-					</ul>
+					<div className="boxDropdown" style={{ display: openDropdown }}>
+						<ul className="options">
+							<li>Carregando repositórios, aguarde...</li>
+						</ul>
+					</div>
 				</div>
 			);
 		}
@@ -32,15 +66,21 @@ class SelectRepo extends Component{
 					<div className="arrow"><i className="fas fa-angle-down"></i></div>
 					<div className="selected">{curRepo}</div>
 				</div>
-				<ul className="options" style={{ display: openDropdown }}>
-					{	
-						repositories.map( function( repository ){
-							return (
-								<li key={repository.id} onClick={getStatisRepo.bind( this, repository, chart )} >{repository.name}</li>
-							);
-						})
-					}
-				</ul>
+				<div className="boxDropdown" style={{ display: openDropdown }}>
+					<div className="serachBox">
+						<i className="fas fa-search"></i> <input type="texte" placeholder="Buscar..." onKeyUp={this.searchRepo} />
+					</div>
+					<ul className="options">
+						{	
+							repositories.map( function( repository ){
+								return (
+									<li key={repository.id} onClick={getStatisRepo.bind( this, repository, chart )} >{repository.name}</li>
+								);
+							})
+						}
+						<li className="empty">Nada encontrado.</li>
+					</ul>
+				</div>
 			</div>
 		);
 	}
@@ -69,11 +109,11 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch({ type: 'OPEN_DROPDOWN', payload: ( flag == 'block' ? 'none' : 'block' ) });
 		},
 		loadRepo: () => {
-			fetch( 'https://api.github.com/users/globocom/repos?sort=stars:desc&per_page=999' )
+			fetch( 'https://api.github.com/search/repositories?q=user:globocom&sort=stars:desc&per_page=200' )
 			.then( res => res.json() )
 			.then(
 				( result ) => {
-					dispatch({ type: 'LOAD_REPOSITORIES', payload: result });
+					dispatch({ type: 'LOAD_REPOSITORIES', payload: result.items });
 				}
 			);
 		},
@@ -98,58 +138,70 @@ const mapDispatchToProps = (dispatch) => {
 					});
 
 					//Monta o gráfico
-					let months		= [ 
-							'Jan', 'Fev', 'Mar', 'Abr', 
-							'Mai', 'Jun', 'Jul', 'Ago', 
-							'Set', 'Out', 'Nov', 'Dez' 
-						],
-						date 		= new Date(),
-						curMonth 	= date.getMonth() + 1,
-						curYear 	= date.getFullYear(),
-						chxl 		= '1:|',
-						chd 		= '',
-						valores 	= [];
+					fetch( `https://api.github.com/repos/globocom/${repository.name}/commits?per_page=999` )
+					.then( res => res.json() )
+					.then(
+						( result ) => {
 
-					for ( let i = 1; i <= 12; i++ ) {
+							//Monta o gráfico
+							let months		= [ 
+									'Jan', 'Fev', 'Mar', 'Abr', 
+									'Mai', 'Jun', 'Jul', 'Ago', 
+									'Set', 'Out', 'Nov', 'Dez' 
+								],
+								arValores 	= [],
+								chxl 		= '1:|',
+								chd 		= 't:';
 
-						//Adiciona meses no eixo X
-						chxl += months[i - 1] + '/'+ curYear +'|';
+								//Popula array com a linha do tempo de commits ( mes / ano );
+								result.map( function( commit ){
 
-						//Caso seja menor ou igual ao mês atual, faz o fetch
-						if( i <= curMonth ){
+									let dateCommit 	= new Date( commit.commit.committer.date ),
+										key 		= dateCommit.getFullYear() + '-' + ( dateCommit.getMonth() + 1 );
 
-							fetch( 'https://api.github.com/repos/globocom/'+ repository.name +'/commits?since='+ curYear +'-'+ i +'-01&until='+ curYear +'-'+ i +'-31' )
-							.then( res => res.json() )
-							.then(
-								( result ) => {
+										arValores[key] = ( arValores[key] == undefined ? 1 : arValores[key] + 1 );
 
-									valores[i - 1] = ( result.length > 0 ? result.length : 0 );
+								});
 
-									//Exibe informações com os novos estados
-									if( i == curMonth ){
+								//Com base na linha do tempo, monta o grafico, com os ultimos 12 meses com base no ultimo commit
+								let nextDate = '';
 
-										let url 			= '',
-											newChart 		= chart;
-											newChart.chxl 	= chxl;
-											newChart.chd 	= 't:' + valores.join();
+								for ( let i = 1; i <= 12; i++ ) {
 
-											//Monta a URL do gráfico
-											for( let key in newChart ){
-												url += key + '=' + ( newChart[key] != undefined ? newChart[key] : '' ) + '&';
-											}
+									if( nextDate == '' )
+										nextDate = Object.keys(arValores)[0];
 
-											dispatch({ type: 'RENDER_CHART_URL', payload: url });
-											dispatch({ type: 'SHOW_LOADER', payload: true });
+									let data = new Date( nextDate );
 
-									}
+									//Adiciona meses no eixo X
+									chxl += months[data.getMonth()] + '/'+ data.getFullYear() +'|';
 
+									//Adiciona o valor do mês
+									chd += ( arValores[nextDate] != undefined ? arValores[nextDate] : 0 ) + ( i != 12 ? ',' : '' );
+
+									//Pega o próximo mês
+									data = new Date( nextDate );
+									data.setMonth( data.getMonth() - 1 );
+									
+									nextDate = data.getFullYear() + '-' + ( data.getMonth() + 1 );
 								}
-							);
 
-						}else 
-							valores[i - 1] = 0; //Os meses que do futuro tem que ter o valor setado para 0
+								let url 			= '',
+									newChart 		= chart;
+									newChart.chxl 	= chxl;
+									newChart.chd 	= chd;
 
-					}
+								//Monta a URL do gráfico
+								for( let key in newChart ){
+									url += key + '=' + ( newChart[key] != undefined ? newChart[key] : '' ) + '&';
+								}
+
+								//Remove o Loader e exibe as informações
+								dispatch({ type: 'RENDER_CHART_URL', payload: url });
+								dispatch({ type: 'SHOW_LOADER', payload: true });
+
+						}
+					);
 
 				}
 			);
