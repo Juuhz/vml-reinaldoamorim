@@ -29,7 +29,7 @@ Caso queira modificar o CSS, você precisará do Gulp:
 
 É bem simples, com 4 passos você conseguirá rodar o GitChart em sua máquina. Veja:
 
-**1) Clone o projeto para sua máquina:**
+**1) Clone o projeto para sua máquina**
 
 ```
 

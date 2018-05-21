@@ -3,7 +3,7 @@ import { connect } 			from 'react-redux';
 
 class SelectRepo extends Component{
 
-	//Ajax para carregar os repositorios
+	//Carregar os repositorios
 	componentDidMount(){
 		const { loadRepo } = this.props;
 		loadRepo();
@@ -30,10 +30,6 @@ class SelectRepo extends Component{
 			}
 
 			//Verifica se há li sendo exibida
-
-			console.log( ocultados );
-			console.log( repos.length );
-
 			if( ocultados >= repos.length )
 				document.querySelectorAll('.options li.empty')[0].style.display = "block";
 			else
@@ -134,7 +130,6 @@ const mapDispatchToProps = (dispatch) => {
 						stars: 		repository.stargazers_count,
 						fork: 		repository.forks_count,
 						contribs: 	( result.length > 0 ? result.length : 0 ),
-						//loader: 	true
 					});
 
 					//Monta o gráfico

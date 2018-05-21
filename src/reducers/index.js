@@ -6,7 +6,7 @@ const initStates = {
 	starsCount: 		0,
 	forkCount: 			0,
 	contribsCount: 		0,
-	curRepo: 			'Selecione um repositório | Globo.com',
+	curRepo: 			'Selecione um repositório',
 	showLoader: 		false,
 	showInfos: 			false,
 	chart: {
@@ -43,7 +43,6 @@ function reducer( state = initStates, action ){
 				starsCount: 	action.stars,
 				forkCount: 		action.fork,
 				contribsCount: 	action.contribs,
-				//showLoader: 	action.loader
 			});
 
 		case 'SHOW_INFOS':
